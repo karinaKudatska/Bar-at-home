@@ -82,7 +82,7 @@ export default function Cart({isCartOpen, setIsCartOpen, items, setIsSuccessOpen
     }
     console.log(text)
     let url = `https://api.telegram.org/bot1626405477:AAHlMsUQr7-iLatbhXYBoJvpW5jV93zF1_E/sendMessage?chat_id=-493963602&text=${text}&parse_mode=HTML`
-    // fetch(url).then(r => console.log(r))
+    fetch(url).then(r => console.log(r))
   }
 
   return (
