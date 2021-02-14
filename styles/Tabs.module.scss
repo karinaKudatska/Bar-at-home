@@ -1,0 +1,104 @@
+@import "variables";
+.tabs {
+  width: 450px;
+  &__top {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      cursor: pointer;
+      width: 50%;
+      padding: 16px 0;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      text-align: center;
+      color: $secondary-grey;
+      border-bottom: 1px solid $secondary-grey;
+      &.tabs__active {
+        border-bottom: 3px solid $main-color;
+        color: $primary-white;
+      }
+    }
+  }
+
+  &__description {
+    font-size: 16px;
+    line-height: 24px;
+    color: $primary-grey;
+  }
+
+  &__review {
+    padding: 16px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    span {
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 24px;
+    }
+    p {
+      margin-top: 8px;
+      font-size: 16px;
+      line-height: 24px;
+      color: $primary-grey;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .tabs {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .tabs {
+    &__top {
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+
+      div {
+        cursor: pointer;
+        width: 50%;
+        padding: 16px 0;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        color: $secondary-grey;
+        border-bottom: 1px solid $secondary-grey;
+        &.tabs__active {
+          border-bottom: 3px solid $main-color;
+          color: $primary-white;
+        }
+      }
+    }
+
+    &__description {
+      font-size: 14px;
+      line-height: 24px;
+    }
+
+    &__review {
+      padding: 16px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      span {
+        margin-bottom: 8px;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 24px;
+      }
+      p {
+        font-size: 14px;
+        line-height: 24px;
+      }
+    }
+  }
+}

@@ -1,0 +1,229 @@
+@import "variables";
+.footer {
+  width: 100vw;
+  padding: 32px 0;
+  background: $primary-black;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    align-items: center;
+    height: 100%;
+    width: 1200px;
+    margin: auto;
+  }
+
+  &__left {
+    p {
+      font-size: 12px;
+      line-height: 16px;
+    }
+    &_phone {
+      margin: 16px 0 36px;
+      p {
+        margin-bottom: 8px;
+      }
+      a {
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        transition: $main-transition;
+
+        &:hover {
+          color: $main-color-hover;
+        }
+      }
+    }
+
+    &_socials {
+      p {
+        margin-bottom: 16px;
+      }
+      a {
+        img {
+          width: 32px;
+        }
+      }
+      a:not(:last-child) {
+        margin-right: 16px;
+      }
+    }
+  }
+
+  &__right {
+    display: flex;
+    justify-content: space-around;
+    &_menu {
+      &.catalog {
+        ul {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          column-gap: 30px;
+        }
+      }
+      h2 {
+        margin-bottom: 12px;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 32px;
+      }
+      ul {
+        li {
+          a {
+            font-size: 12px;
+            line-height: 16px;
+            transition: $main-transition;
+
+            &:hover {
+              color: $main-color-hover;
+            }
+          }
+
+          &:not(:last-child) {
+            margin-bottom: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .footer {
+    &__container {
+      width: 100%;
+      padding: 0 24px;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .footer {
+    &__container {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+    }
+    &__left {
+      order: 2;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      p {
+        font-size: 11px;
+        line-height: 16px;
+      }
+      &_phone {
+        margin: 0;
+        p {
+          margin-bottom: 8px;
+        }
+        a {
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 24px;
+          font-feature-settings: 'pnum' on, 'lnum' on;
+          transition: $main-transition;
+
+          &:hover {
+            color: $main-color-hover;
+          }
+        }
+      }
+
+      &_socials {
+        p {
+          margin-bottom: 16px;
+        }
+        a {
+          img {
+            width: 32px;
+          }
+        }
+        a:not(:last-child) {
+          margin-right: 16px;
+        }
+      }
+    }
+
+    &__right {
+      display: flex;
+      justify-content: space-around;
+      &_menu {
+        h2 {
+          margin-bottom: 12px;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 32px;
+        }
+        ul {
+          li {
+            a {
+              font-size: 11px;
+              line-height: 16px;
+              transition: $main-transition;
+
+              &:hover {
+                color: $main-color-hover;
+              }
+            }
+
+            &:not(:last-child) {
+              margin-bottom: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    &__container {
+      grid-template-columns: 1fr 3fr;
+      row-gap: 0;
+    }
+    &__left {
+      min-width: 170px;
+      align-self: flex-start;
+      order: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      &_phone {
+        margin: 16px 0 36px;
+      }
+    }
+
+    &__right {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .footer {
+    &__container {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+    }
+    &__left {
+      min-width: 170px;
+      align-self: flex-start;
+      order: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      &_phone {
+        margin: 16px 0 36px;
+      }
+    }
+
+    &__right {
+      display: none;
+    }
+  }
+}

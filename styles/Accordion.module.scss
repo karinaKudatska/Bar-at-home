@@ -1,0 +1,14 @@
+@import "variables";
+.accordion {
+  display: none;
+}
+
+@media screen and (max-width: 768px){
+  .accordion {
+    display: block;
+    & * {
+      background: transparent;
+    }
+
+  }
+}
