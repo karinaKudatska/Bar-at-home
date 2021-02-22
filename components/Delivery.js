@@ -4,9 +4,10 @@ import { motion } from "framer-motion"
 import { delivery, payment } from '../data'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
-export default function Delivery({isDeliveryOpen, setIsDeliveryOpen}) {
+export default function Delivery({isDeliveryOpen, setIsDeliveryOpen, unFixBody}) {
   const handleClickAway = () => {
     setIsDeliveryOpen(false);
+    unFixBody()
   };
   return (
       <Modal
@@ -21,7 +22,7 @@ export default function Delivery({isDeliveryOpen, setIsDeliveryOpen}) {
           >
             <div className={styles.modal__top}>
               <h2>Доставка і оплата</h2>
-              <img src="images/icons/close.svg" onClick={() => setIsDeliveryOpen(false)} />
+              <img src="images/icons/close.svg" onClick={() => {setIsDeliveryOpen(false); unFixBody()}} />
             </div>
             <div className={styles.modal__main}>
               <h3>Доставка</h3>

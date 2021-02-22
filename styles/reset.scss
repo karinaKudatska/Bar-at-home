@@ -3,6 +3,13 @@
   box-sizing: border-box;
   color: $primary-white;
   scroll-behavior: smooth;
+  --scroll-behavior: smooth;
+  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -34,6 +41,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
   line-height: 1;
+  background: $primary-black;
 }
 ol, ul {
   list-style: none;

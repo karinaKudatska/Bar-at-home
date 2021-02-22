@@ -1,7 +1,7 @@
 import styles from '../styles/Header.module.scss'
 import Logo from './Logo'
 
-export default function Header({setIsCartOpen, setIsMenuOpen}) {
+export default function Header({setIsCartOpen, setIsMenuOpen, fixBody}) {
   return (
     <header className={styles.header}>
       <div className={styles.header__container}>
@@ -15,7 +15,7 @@ export default function Header({setIsCartOpen, setIsMenuOpen}) {
               <li><a href="#catalog">Каталог</a></li>
               <li><a href="#reviews">Відгуки</a></li>
               <li><a href="#video-guide">Відео-гайди</a></li>
-              <li onClick={() => setIsCartOpen(true)}>
+              <li onClick={() => {setIsCartOpen(true); fixBody()}}>
                 <a>
                   Кошик
                   <img src="images/icons/cart.svg" />
@@ -24,8 +24,12 @@ export default function Header({setIsCartOpen, setIsMenuOpen}) {
             </ul>
           </nav>
           <nav className={styles.header__nav_mobile}>
-            <img onClick={() => setIsMenuOpen(true)} src="images/icons/burger.svg" />
-            <img onClick={() => setIsCartOpen(true)} src="images/icons/cart.svg" />
+            <div>
+              <img onClick={() => {setIsMenuOpen(true); fixBody()}} src="images/icons/burger.svg" />
+            </div>
+            <div>
+              <img onClick={() => {setIsCartOpen(true); fixBody()}} src="images/icons/cart.svg" />
+            </div>
           </nav>
         </div>
       </div>

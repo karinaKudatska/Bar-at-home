@@ -1,24 +1,18 @@
 @import "variables";
+.fixedButton {
+  display: none;
+}
 .product {
   padding: 0 150px 24px;
-  height: 80vh;
-  overflow: scroll;
   background: $secondary-black;
   outline: none;
 
   &__wrapper {
-    margin: 100px auto 0;
+    margin: 10vh auto 10vh;
     width: 100%;
     max-width: 1280px;
     outline: none;
-  }
-  &__decor {
-    height: 24px;
-    position: sticky;
-    top: calc(100% - 24px);
-    left: 0;
-    right: 0;
-    background: $secondary-black;
+    height: 80%;
   }
 
   &__close {
@@ -30,6 +24,10 @@
     background: $secondary-black;
     top: 0;
     z-index: 999;
+
+    &_inner {
+      display: none;
+    }
 
     img {
       width: 24px;
@@ -61,19 +59,41 @@
     }
   }
   &__video {
+    width: 50%;
+    margin-left: 30px;
     padding-top: 50px;
-    padding-right: 100px;
     display: flex;
     align-items: flex-start;
     &_image {
-      &:after {
-        content: url("../public/images/icons/play.svg");
-        position: absolute;
-        width: 32px;
-        height: 32px;
-        top: 50%;
-        left: 50%;
-        transform: translateY(-60%) translateX(-50%);
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      div:first-child {
+        position: relative;
+        margin-right: 8px;
+        &:after {
+          content: url("../public/images/icons/play.svg");
+          position: absolute;
+          width: 32px;
+          height: 32px;
+          top: 50%;
+          left: 50%;
+          transform: translateY(-60%) translateX(-50%);
+        }
+      }
+      div:last-child {
+        h3 {
+          margin-bottom: 5px;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 24px;
+        }
+        p {
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 16px;
+          color: #BEC7D7;
+        }
       }
     }
   }
@@ -178,24 +198,15 @@
 
 @media screen and (max-width: 1024px) {
   .product {
-    height: 80vh;
-    overflow: scroll;
+    max-height: none;
+    padding-top: 40px;
     background: $secondary-black;
     outline: none;
 
     &__wrapper {
-      margin: 100px auto 0;
       width: 100%;
       max-width: 1280px;
       outline: none;
-    }
-    &__decor {
-      height: 24px;
-      position: sticky;
-      top: calc(100% - 24px);
-      left: 0;
-      right: 0;
-      background: $secondary-black;
     }
 
     &__close {
@@ -204,7 +215,6 @@
       display: flex;
       justify-content: flex-end;
       position: sticky;
-      background: $secondary-black;
       top: 0;
       z-index: 999;
 
@@ -350,42 +360,53 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
+  .fixedButton {
+    padding: 16px 0 0;
+    display: block;
+    width: 100%;
+    button {
+      width: 100%;
+    }
+  }
   .product {
     padding: 0 16px 16px;
-    height: 80vh;
-    overflow: scroll;
-    background: $secondary-black;
-    outline: none;
+    position: relative;
+    width: auto;
+    margin: auto;
+    border-radius: 10px;
+    overflow-y: scroll;
+    height: 100%;
+    pointer-events: auto;
 
     &__wrapper {
-      margin: 100px auto 0;
+      padding: 30px 0;
+      height: 100%;
       width: 100%;
-      max-width: 1280px;
-      outline: none;
-    }
-    &__decor {
-      height: 24px;
-      position: sticky;
-      top: calc(100% - 24px);
+      margin: 0 auto;
+      position: fixed;
+      top: 0;
       left: 0;
-      right: 0;
-      background: $secondary-black;
+      overflow-y: hidden;
     }
 
     &__close {
-      height: 48px;
-      padding: 0 24px;
-      display: flex;
-      justify-content: flex-end;
-      position: sticky;
-      background: $secondary-black;
-      top: 0;
-      z-index: 999;
+      display: none;
+      &_inner {
+        height: 40px;
+        padding: 0 16px;
+        display: flex;
+        justify-content: flex-end;
+        background: $secondary-black;
+        position: sticky;
+        position: -webkit-sticky;
+        top: 0;
+        z-index: 99999;
 
-      img {
-        width: 24px;
-        cursor: pointer;
+        img {
+          width: 24px;
+          cursor: pointer;
+        }
       }
     }
     &__images {
@@ -448,6 +469,10 @@
     &__buy {
       display: flex;
       margin-bottom: 32px;
+
+      button {
+        display: none;
+      }
     }
     &__item_price {
       display: flex;

@@ -16,10 +16,12 @@ import Success from "../components/Success";
 import Return from '../components/Return'
 import MobileMenu from "../components/MobileMenu";
 import PulseButton from "../components/PulseButton";
+import ModalVideo from "react-modal-video";
+import Loader from "../components/Loader";
 
 export default function Home() {
   const [activeVideo, setActiveVideo] = useState(videoGuides[0])
-  const [selectedGoods, setSelectedGoods] = useState([]);
+  const [selectedGoods, setSelectedGoods] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState({})
 
   //Modal
@@ -29,6 +31,11 @@ export default function Home() {
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isReturnOpen, setIsReturnOpen] = useState(false);
+  const [isVideoOpen, setIsVideoOpen] = useState(false)
+  const [videoId, setVideoId] = useState(null)
+
+  const [isLoaderVisible, setIsLoaderVisible] = useState(false);
+  const [isBigLoaderVisible, setIsBigLoaderVisible] = useState(false);
 
   //Catalog
   const [itemsCount, setItemsCount] = useState(4);
@@ -39,16 +46,35 @@ export default function Home() {
   const [phone, setPhone] = useState('');
   const [disabledButton, setDisabledButton] = useState(true);
 
+  const fixBody = () => {
+    document.querySelector('html').classList.add('fixed')
+  }
+  const unFixBody = () => {
+    document.querySelector('html').classList.remove('fixed')
+  }
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('goods'))) {
+      setSelectedGoods(JSON.parse(localStorage.getItem('goods')))
+    } else {
+      setSelectedGoods([])
+    }
+  }, [])
 
   const addToCart = (item) => {
-    if(selectedGoods.includes(item)) {
-      selectedGoods[selectedGoods.indexOf(item)].amount++
+    let filtered =  selectedGoods.filter(el => el.title === item.title);
+    if (selectedGoods.length) {
+      if(filtered.length) {
+        filtered[0].amount++
+      } else {
+        item.amount = 1
+        setSelectedGoods([...selectedGoods, item])
+      }
     } else {
       item.amount = 1
       setSelectedGoods([...selectedGoods, item])
     }
     setIsCartOpen(true)
-    localStorage.setItem('goods', JSON.stringify(selectedGoods))
   }
   const selectProduct = (item) => {
     setSelectedProduct(item)
@@ -67,14 +93,14 @@ export default function Home() {
     e.preventDefault()
     let text = `@lasgrate @Silence_side%0A%0A<b>Форма зворотнього зв'язку</b>%0A`
     text += `%0A<b>Ім'я:</b> ${name}%0A<b>Телефон:</b> ${phone}`
-    console.log(text)
     let url = `https://api.telegram.org/bot1626405477:AAHlMsUQr7-iLatbhXYBoJvpW5jV93zF1_E/sendMessage?chat_id=-493963602&text=${text}&parse_mode=HTML`
     fetch(url).then(r => console.log(r))
   }
   return (
     <div>
-      <Header setIsCartOpen={setIsCartOpen} setIsMenuOpen={setIsMenuOpen}/>
+      <Header fixBody={fixBody} setIsCartOpen={setIsCartOpen} setIsMenuOpen={setIsMenuOpen}/>
       <main className={styles.main}>
+        <div className={styles.main__decor}></div>
         <section className={styles.top}>
           <h1>Універсальні набори для бару</h1>
           <p>Спробуй себе у ролі бартендера — влаштовуй власний бар та пий улюблені коктейлі вдома в 3 рази дешевше!</p>
@@ -171,103 +197,118 @@ export default function Home() {
             </li>
           </ul>
         </section>
-        {/*<img src="https://i.ytimg.com/vi/ogU8amrmdWI/maxresdefault.jpg" />*/}
 
-        <section id="catalog" className={`${styles.catalog} ${styles.catalog__desktop}`}>
-          <h2>Каталог</h2>
-          <div className={styles.catalog__list}>
-            {sets.map(set => (
-              <div key={set.title} className={styles.catalog__item}>
-                <img className={styles.catalog__item_image} src={set.images[0]} />
-                <div className={styles.catalog__item_info}>
-                  <div className={styles.catalog__item_top}>
-                    <h3>{set.title}</h3>
-                    <p>{set.subtitle}</p>
-                    <div className={styles.catalog__item_reviews}>
-                      <div className={styles.catalog__item_raiting}>
-                        <img src="images/icons/rate.svg" />
-                        <div style={{width: `${100 - set.rating}%`}}></div>
-                      </div>
-                      <div className={styles.catalog__item_comments}>
-                        <img src="images/icons/comment.svg" />
-                        {set.reviews.length}
+        <div id="catalog">
+          <section className={`${styles.catalog} ${styles.catalog__desktop}`}>
+            <h2>Каталог</h2>
+            <div className={styles.catalog__list}>
+              {sets.map(set => (
+                <div key={set.title} className={styles.catalog__item}>
+                  <img className={styles.catalog__item_image} src={set.images[0]} />
+                  <div className={styles.catalog__item_info}>
+                    <div className={styles.catalog__item_top}>
+                      <h3>{set.title}</h3>
+                      <p>{set.subtitle}</p>
+                      <div className={styles.catalog__item_reviews}>
+                        <div className={styles.catalog__item_raiting}>
+                          <img src="images/icons/rate.svg" />
+                          <div style={{width: `${100 - set.rating}%`}}></div>
+                        </div>
+                        <div className={styles.catalog__item_comments}>
+                          <img src="images/icons/comment.svg" />
+                          {set.reviews.length}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className={styles.catalog__item_bottom}>
-                    {set.discount &&
-                    <div className={styles.catalog__item_price}>
-                      <div className={styles.catalog__item_discount}>
-                        <span style={{textDecoration: "line-through"}}>{set.price} грн</span>
-                        <span>-{set.discount}</span>
+                    <div className={styles.catalog__item_bottom}>
+                      {set.discount &&
+                      <div className={styles.catalog__item_price}>
+                        <div className={styles.catalog__item_discount}>
+                          <span style={{textDecoration: "line-through"}}>{set.price} грн</span>
+                          <span>-{set.discount}</span>
+                        </div>
+                        <span>{set.price - set.discount} грн</span>
                       </div>
-                      <span>{set.price - set.discount} грн</span>
+                      }
+                      {!set.discount &&
+                      <span className={styles.catalog__item_price}>{set.price} грн</span>
+                      }
+                      <Button onClick={() => {selectProduct(set); fixBody()}} text="Купити" />
                     </div>
-                    }
-                    {!set.discount &&
-                    <span className={styles.catalog__item_price}>{set.price} грн</span>
-                    }
-                    <Button onClick={() => selectProduct(set)} text="Купити" />
+                  </div>
+                  <div className={styles.button__big}>
+                    <Button onClick={() => {selectProduct(set); fixBody()}} text="Купити" />
                   </div>
                 </div>
-                <div className={styles.button__big}>
-                  <Button onClick={() => selectProduct(set)} text="Купити" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
 
-        <section id="catalog" className={styles.catalog__mobile}>
-          <h2>Каталог</h2>
-          <div className={styles.catalog__list}>
-            {sets.slice(0, itemsCount).map(set => (
-              <div id={set.id} key={set.title} className={styles.catalog__item}>
-                <img className={styles.catalog__item_image} src={set.images[0]} />
-                <div className={styles.catalog__item_info}>
-                  <div className={styles.catalog__item_top}>
-                    <h3>{set.title}</h3>
-                    <p>{set.subtitle}</p>
-                    <div className={styles.catalog__item_reviews}>
-                      <div className={styles.catalog__item_raiting}>
-                        <img src="images/icons/rate.svg" />
-                        <div style={{width: `${100 - set.rating}%`}}></div>
-                      </div>
-                      <div className={styles.catalog__item_comments}>
-                        <img src="images/icons/comment.svg" />
-                        {set.reviews.length}
+          <section className={styles.catalog__mobile}>
+            <h2>Каталог</h2>
+            <div className={styles.catalog__list}>
+              {sets.slice(0, itemsCount).map(set => (
+                <div id={set.id} key={set.title} className={styles.catalog__item}>
+                  <img className={styles.catalog__item_image} src={set.images[0]} />
+                  <div className={styles.catalog__item_info}>
+                    <div className={styles.catalog__item_top}>
+                      <h3>{set.title}</h3>
+                      <p>{set.subtitle}</p>
+                      <div className={styles.catalog__item_reviews}>
+                        <div className={styles.catalog__item_raiting}>
+                          <img src="images/icons/rate.svg" />
+                          <div style={{width: `${100 - set.rating}%`}}></div>
+                        </div>
+                        <div className={styles.catalog__item_comments}>
+                          <img src="images/icons/comment.svg" />
+                          {set.reviews.length}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className={styles.catalog__item_bottom}>
-                    {set.discount &&
-                    <div className={styles.catalog__item_price}>
-                      <div className={styles.catalog__item_discount}>
-                        <span style={{textDecoration: "line-through"}}>{set.price} грн</span>
-                        <span>-{set.discount}</span>
+                    <div className={styles.catalog__item_bottom}>
+                      {set.discount &&
+                      <div className={styles.catalog__item_price}>
+                        <div className={styles.catalog__item_discount}>
+                          <span style={{textDecoration: "line-through"}}>{set.price} грн</span>
+                          <span>-{set.discount}</span>
+                        </div>
+                        <span>{set.price - set.discount} грн</span>
                       </div>
-                      <span>{set.price - set.discount} грн</span>
+                      }
+                      {!set.discount &&
+                      <span className={styles.catalog__item_price}>{set.price} грн</span>
+                      }
+                      <Button onClick={() => {selectProduct(set); fixBody()}} text="Купити" />
                     </div>
-                    }
-                    {!set.discount &&
-                    <span className={styles.catalog__item_price}>{set.price} грн</span>
-                    }
-                    <Button onClick={() => selectProduct(set)} text="Купити" />
+                  </div>
+                  <div className={styles.button__big}>
+                    <Button onClick={() => {selectProduct(set); fixBody()}} text="Купити" />
                   </div>
                 </div>
-                <div className={styles.button__big}>
-                  <Button onClick={() => selectProduct(set)} text="Купити" />
-                </div>
-              </div>
-            ))}
-          </div>
-          {itemsCount === 4 &&
-          <Button text="Показати більше" onClick={() => setTimeout(() => setItemsCount(sets.length), 1000)}/>
-          }
-          {itemsCount > 4 &&
-          <Button text="Приховати" onClick={() => setTimeout(() => {setItemsCount(4)}, 1000)}/>
-          }
-        </section>
+              ))}
+            </div>
+            {sets.length > 4 &&
+              <>
+                {itemsCount === 4 &&
+                <p onClick={() => {setIsLoaderVisible(true); setTimeout(() => {setIsLoaderVisible(false);setItemsCount(sets.length);}, 1000)}}>
+                  Показати більше
+                  {isLoaderVisible &&
+                  <div className={styles.loader} />
+                  }
+                </p>
+                }
+                {itemsCount > 4 &&
+                  <p onClick={() => {setIsLoaderVisible(true); setTimeout(() => {setItemsCount(4); document.getElementById('catalog').scrollIntoView({behavior: "smooth", block: "end"}); setIsLoaderVisible(false);}, 1000)}}>
+                  Приховати
+                  {isLoaderVisible &&
+                  <div className={styles.loader} />
+                  }
+                  </p>
+                }
+            </>
+            }
+          </section>
+        </div>
 
         <section id="reviews" className={styles.reviews}>
           <h2>Відгуки</h2>
@@ -294,9 +335,14 @@ export default function Home() {
         <section id="video-guide" className={styles.videoGuide}>
           <h2>Відео-гайди</h2>
           <div className={styles.videoGuide__content}>
-            <iframe width="800" height="450" src={activeVideo.video} frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen/>
+            <div>
+              <iframe width="800" height="450" src={activeVideo.video} frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+              />
+              <h3>{activeVideo.title}</h3>
+              <p>{activeVideo.subtitle}</p>
+            </div>
             {videoGuides.length > 1 &&
             <Swiper
               slidesPerView={4}
@@ -312,6 +358,7 @@ export default function Home() {
                   onClick={() => setActiveVideo(item)}
                 >
                   <img
+                    className={item.img === activeVideo.img ? styles.active : ''}
                     src={`https://i.ytimg.com/vi/${item.img}/maxresdefault.jpg`}
                     width="160"
                     height="90" />
@@ -320,20 +367,36 @@ export default function Home() {
             </Swiper>
             }
           </div>
-          <div className={styles.videoGuide__content_mobile}>
+          <div className={styles.videoGuide__content_mobile} id="videoGuides-mobile">
               {videoGuides.slice(0, videosCount).map((item, i) => (
                 <div  style={{marginBottom: 30}}>
                 <iframe key={i} width="100%" height="300" src={item.video} frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen/>
-                        <h3>{item.title}</h3>
+                        allowFullScreen
+                />
+                  <h3>{item.title}</h3>
+                  <p>{activeVideo.subtitle}</p>
                 </div>
               ))}
-            {videosCount === 3 &&
-              <p onClick={() => setVideosCount(videoGuides.length)}>Показати всі відео</p>
-            }
-            {videosCount > 3 &&
-            <p onClick={() => setVideosCount(3)}>Приховати відео</p>
+            {videoGuides.length > 3 &&
+              <>
+                {videosCount === 3 &&
+                  <p onClick={() => {setIsLoaderVisible(true); setTimeout(() => {setIsLoaderVisible(false); setVideosCount(videoGuides.length);}, 1000)}}>
+                    Показати всі відео
+                    {isLoaderVisible &&
+                      <div className={styles.loader} />
+                    }
+                  </p>
+                }
+                {videosCount > 3 &&
+                  <p onClick={() => {setIsLoaderVisible(true); setTimeout(() => {setVideosCount(3); document.getElementById('videoGuides-mobile').scrollIntoView({behavior: "smooth", block: "end"}); setIsLoaderVisible(false);}, 1000)}}>
+                    Приховати відео
+                    {isLoaderVisible &&
+                      <div className={styles.loader} />
+                    }
+                  </p>
+                }
+              </>
             }
           </div>
         </section>
@@ -349,14 +412,16 @@ export default function Home() {
           </form>
         </section>
       </main>
-      <Footer setIsDeliveryOpen={setIsDeliveryOpen} setIsReturnOpen={setIsReturnOpen}/>
-      <Product product={sets.indexOf(selectedProduct)} setIsProductOpen={setIsProductOpen} isProductOpen={isProductOpen} setSelectedProduct={setSelectedProduct} addToCart={addToCart}/>
-      <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} items={selectedGoods} setIsSuccessOpen={setIsSuccessOpen} />
-      <Delivery isDeliveryOpen={isDeliveryOpen} setIsDeliveryOpen={setIsDeliveryOpen} />
-      <Success isSuccessOpen={isSuccessOpen} setIsSuccessOpen={setIsSuccessOpen} />
-      <Return isReturnOpen={isReturnOpen} setIsReturnOpen={setIsReturnOpen} />
-      <MobileMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} setIsCartOpen={setIsCartOpen}/>
+      <Loader isBigLoaderVisible={isBigLoaderVisible} />
+      <Footer fixBody={fixBody} setIsDeliveryOpen={setIsDeliveryOpen} setIsReturnOpen={setIsReturnOpen}/>
+      <Product unFixBody={unFixBody} setIsVideoOpen={setIsVideoOpen} setVideoId={setVideoId} unFixBody={unFixBody} product={sets.indexOf(selectedProduct)} setIsProductOpen={setIsProductOpen} isProductOpen={isProductOpen} setSelectedProduct={setSelectedProduct} addToCart={addToCart}/>
+      <Cart setIsProductOpen={setIsProductOpen} setIsBigLoaderVisible={setIsBigLoaderVisible} unFixBody={unFixBody} isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} items={selectedGoods} setIsSuccessOpen={setIsSuccessOpen} />
+      <Delivery unFixBody={unFixBody} isDeliveryOpen={isDeliveryOpen} setIsDeliveryOpen={setIsDeliveryOpen} />
+      <Success unFixBody={unFixBody} isSuccessOpen={isSuccessOpen} setIsSuccessOpen={setIsSuccessOpen} />
+      <Return unFixBody={unFixBody} isReturnOpen={isReturnOpen} setIsReturnOpen={setIsReturnOpen} />
+      <MobileMenu unFixBody={unFixBody} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} setIsCartOpen={setIsCartOpen}/>
       <PulseButton />
+      <ModalVideo channel='youtube' autoplay isOpen={isVideoOpen} videoId={videoId} onClose={() => setIsVideoOpen(false)} />
     </div>
   )
 }

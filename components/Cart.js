@@ -6,8 +6,8 @@ import InputMask from "react-input-mask";
 import Button from "./Button";
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
-export default function Cart({isCartOpen, setIsCartOpen, items, setIsSuccessOpen }) {
-  const [order, setOrder] = useState([])
+export default function Cart({isCartOpen, setIsCartOpen, items, unFixBody, setIsBigLoaderVisible, setIsSuccessOpen, setIsProductOpen }) {
+  const [order, setOrder] = useState(items)
   const [total, setTotal] = useState(0)
   const [discount, setDiscount] = useState(0)
   const [name, setName] = useState('');
@@ -15,9 +15,9 @@ export default function Cart({isCartOpen, setIsCartOpen, items, setIsSuccessOpen
   const [email, setEmail] = useState('');
   const [disabledButton, setDisabledButton] = useState(true);
 
-  let text = '';
   const handleClickAway = () => {
     setIsCartOpen(false);
+    unFixBody()
   };
 
   useEffect(() => {
@@ -28,19 +28,24 @@ export default function Cart({isCartOpen, setIsCartOpen, items, setIsSuccessOpen
     }
   }, [phone, name])
 
+
   useEffect(() => {
-    setOrder(items)
-    let sum = 0;
-    let discountSum = 0;
-    items.map(item => {
-      sum += (item.price * item.amount)
-      if (item.discount) {
-        discountSum += (item.discount * item.amount)
-      }
-    })
-    setTotal(sum)
-    setDiscount(discountSum)
+    if (items) {
+      setOrder(items)
+      localStorage.setItem('goods', JSON.stringify(items))
+      let sum = 0;
+      let discountSum = 0;
+      items.map(item => {
+        sum += (item.price * item.amount)
+        if (item.discount) {
+          discountSum += (item.discount * item.amount)
+        }
+      })
+      setTotal(sum)
+      setDiscount(discountSum)
+    }
   }, [items])
+
   const addItem = (item) => {
     item.amount++
     setTotal(total + item.price)
@@ -48,7 +53,9 @@ export default function Cart({isCartOpen, setIsCartOpen, items, setIsSuccessOpen
       setDiscount(discount + item.discount)
     }
     setOrder([...order])
+    localStorage.setItem('goods', JSON.stringify(order))
   }
+
   const subtractItem = (item) => {
     if (item.amount > 1) {
       item.amount--
@@ -57,12 +64,15 @@ export default function Cart({isCartOpen, setIsCartOpen, items, setIsSuccessOpen
         setDiscount(discount - item.discount)
       }
       setOrder([...order])
+      localStorage.setItem('goods', JSON.stringify(order))
     }
   }
+
   const removeItem = (item) => {
     let index = order.indexOf(item);
     order.splice(index, 1)
     setOrder([...order])
+    localStorage.setItem('goods', JSON.stringify(order))
     setTotal(total - item.price * item.amount)
     if (item.discount) {
       setDiscount(discount - item.discount * item.amount)
@@ -80,7 +90,13 @@ export default function Cart({isCartOpen, setIsCartOpen, items, setIsSuccessOpen
     if(email.length > 0) {
       text += `%0A<b>Email:</b> ${email}`
     }
-    console.log(text)
+    setIsBigLoaderVisible(true)
+    setTimeout(() => {
+      setIsBigLoaderVisible(false)
+      setIsProductOpen(false)
+      setIsCartOpen(false)
+      setIsSuccessOpen(true)
+    }, 1000)
     let url = `https://api.telegram.org/bot1626405477:AAHlMsUQr7-iLatbhXYBoJvpW5jV93zF1_E/sendMessage?chat_id=-493963602&text=${text}&parse_mode=HTML`
     fetch(url).then(r => console.log(r))
   }
@@ -99,9 +115,9 @@ export default function Cart({isCartOpen, setIsCartOpen, items, setIsSuccessOpen
           >
             <div className={styles.cart__top}>
               <h2>Ваше замовлення</h2>
-              <img src="images/icons/close.svg" onClick={() => setIsCartOpen(false)} />
+              <img src="images/icons/close.svg" onClick={() => {setIsCartOpen(false); unFixBody()}} />
             </div>
-            {order.length > 0 && (
+            {order && (
               <div className={styles.cart__order}>
                 {order.map(item => (
                   <div className={styles.cart__order_item}>
@@ -163,7 +179,7 @@ export default function Cart({isCartOpen, setIsCartOpen, items, setIsSuccessOpen
                 </div>
               </div>
             )}
-            {order.length === 0 && (
+            {!order && (
               <p className={styles.cart__empty}>Ваш кошик порожній.</p>
             )}
           </motion.div>

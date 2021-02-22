@@ -19,7 +19,7 @@ export default function Gallery({product}) {
           768: {
             spaceBetween: 50
           },
-          1024: {
+          1025: {
             direction: 'vertical',
           },
         }}

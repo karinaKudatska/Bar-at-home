@@ -1,6 +1,7 @@
 @import "variables";
 .header {
   position: sticky;
+  position: -webkit-sticky;
   top: 0;
   z-index: 9999;
   width: 100vw;
@@ -97,8 +98,17 @@
         display: flex;
         align-items: center;
 
-        img:first-child {
-          margin-right: 35px;
+        div {
+          height: 100%;
+          display: flex;
+          align-items: center;
+        }
+
+        div:first-child {
+          padding: 0 17px;
+        }
+        div:last-child {
+          padding-left: 17px;
         }
       }
     }

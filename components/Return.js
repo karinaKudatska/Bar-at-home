@@ -4,9 +4,10 @@ import { motion } from "framer-motion"
 import { returnRules } from '../data'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
-export default function Return({isReturnOpen, setIsReturnOpen}) {
+export default function Return({isReturnOpen, setIsReturnOpen, unFixBody}) {
   const handleClickAway = () => {
     setIsReturnOpen(false);
+    unFixBody()
   };
   return (
     <Modal
@@ -21,7 +22,7 @@ export default function Return({isReturnOpen, setIsReturnOpen}) {
         >
           <div className={styles.modal__top}>
             <h2>Правила повернення</h2>
-            <img src="images/icons/close.svg" onClick={() => setIsReturnOpen(false)} />
+            <img src="images/icons/close.svg" onClick={() => {setIsReturnOpen(false); unFixBody()}} />
           </div>
           <div className={styles.modal__main}>
             <p>{returnRules}</p>

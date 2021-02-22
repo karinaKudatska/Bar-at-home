@@ -3,7 +3,7 @@ import Logo from './Logo'
 import {sets} from '../data.js'
 import Accordion from "./Accordion";
 
-export default function Footer({setIsDeliveryOpen, setIsReturnOpen}) {
+export default function Footer({setIsDeliveryOpen, setIsReturnOpen, fixBody}) {
   return (
     <footer className={styles.footer}>
       <div className={styles.footer__container}>
@@ -20,7 +20,7 @@ export default function Footer({setIsDeliveryOpen, setIsReturnOpen}) {
             <a href="https://www.youtube.com/channel/UCWBDl0QWDxHpslavIcn2MgQ"><img src="images/icons/youtube.svg"/></a>
           </div>
         </div>
-        <Accordion setIsDeliveryOpen={setIsDeliveryOpen} setIsReturnOpen={setIsReturnOpen}/>
+        <Accordion fixBody={fixBody} setIsDeliveryOpen={setIsDeliveryOpen} setIsReturnOpen={setIsReturnOpen}/>
         <div className={styles.footer__right}>
           <div className={styles.footer__right_menu}>
             <h2>Про нас</h2>
@@ -46,8 +46,8 @@ export default function Footer({setIsDeliveryOpen, setIsReturnOpen}) {
           <div className={styles.footer__right_menu}>
             <h2>Потрібна допомога?</h2>
             <ul>
-              <li onClick={() => setIsDeliveryOpen(true)}><a>Доставка і оплата</a></li>
-              <li onClick={() => setIsReturnOpen(true)}><a>Правила повернення</a></li>
+              <li onClick={() => {setIsDeliveryOpen(true); fixBody()}}><a>Доставка і оплата</a></li>
+              <li onClick={() => {setIsReturnOpen(true); fixBody()}}><a>Правила повернення</a></li>
             </ul>
           </div>
         </div>

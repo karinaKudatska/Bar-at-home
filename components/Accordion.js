@@ -9,7 +9,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {sets} from "../data";
 
 
-export default function SimpleAccordion({setIsDeliveryOpen, setIsReturnOpen}) {
+export default function SimpleAccordion({setIsDeliveryOpen, setIsReturnOpen, fixBody}) {
 
   return (
     <div className={styles.accordion}>
@@ -60,8 +60,8 @@ export default function SimpleAccordion({setIsDeliveryOpen, setIsReturnOpen}) {
         </AccordionSummary>
         <AccordionDetails className={`${classes.footer__right_menu}`}>
           <ul>
-            <li onClick={() => setIsDeliveryOpen(true)}><a>Доставка і оплата</a></li>
-            <li onClick={() => setIsReturnOpen(true)}><a>Правила повернення</a></li>
+            <li onClick={() => {setIsDeliveryOpen(true); fixBody()}}><a>Доставка і оплата</a></li>
+            <li onClick={() => {setIsReturnOpen(true); fixBody()}}><a>Правила повернення</a></li>
           </ul>
         </AccordionDetails>
       </Accordion>

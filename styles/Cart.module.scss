@@ -11,12 +11,13 @@
   outline: none;
 
   &__empty {
-    font-size: 24px;
+    font-size: 18px;
     padding: 24px;
   }
 
   &__top {
     position: sticky;
+    position: -webkit-sticky;
     background: $secondary-black;
     left: 0;
     right: 0;
@@ -36,7 +37,7 @@
 
   &__order {
     max-height: 740px;
-    overflow: scroll;
+    overflow-y: scroll;
     padding: 16px 24px;
     &_item {
       padding: 16px 0 16px;
@@ -173,6 +174,7 @@
 
 @media screen and (max-width: 630px){
   .cart {
+    height: 100%;
     transform: none !important;
     top: 0;
     min-height: 300px;
@@ -184,8 +186,8 @@
     outline: none;
 
     &__empty {
-      font-size: 24px;
-      padding: 24px;
+      font-size: 14px;
+      padding-top: 100px;
     }
 
     &__top {

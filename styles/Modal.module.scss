@@ -1,19 +1,26 @@
 @import "variables";
 .modal {
+  min-height: 300px;
   margin: auto;
   top: 50%;
-  transform: translateY(-50%);
   position: relative;
+  transform: translateY(50%);
   width: 100%;
   max-width: 640px;
   background: $secondary-black;
   outline: none;
 
   &__top {
+    position: sticky;
+    position: -webkit-sticky;
+    background: $secondary-black;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: space-between;
     padding: 20px 24px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 999;
 
     h2 {
       font-weight: bold;
@@ -30,7 +37,9 @@
   }
 
   &__main {
-    padding: 24px;
+    max-height: 740px;
+    overflow-y: scroll;
+    padding: 16px 24px;
     h3 {
       font-weight: bold;
       font-size: 16px;
@@ -46,5 +55,44 @@
 
   button {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .modal {
+    height: 100vh;
+    transform: none !important;
+    top: 0;
+    min-height: 300px;
+    margin: auto;
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    background: $secondary-black;
+    outline: none;
+
+    &__top {
+      position: fixed;
+      background: $secondary-black;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+      h2 {
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+
+    &__main {
+      max-height: 740px;
+      height: 100vh;
+      overflow-y: scroll;
+      padding: 80px 24px 16px;
+    }
   }
 }

@@ -1,19 +1,26 @@
 @import "variables";
 .menu {
+  height: 100%;
+  transform: none !important;
+  top: 0;
+  min-height: 300px;
   margin: auto;
-  top: 50%;
-  height: 100vh;
-  z-index: 99999;
-  transform: translateY(-50%);
-  position: fixed;
-  width: 100vw;
-  background: $primary-black;
+  position: relative;
+  width: 100%;
+  max-width: 640px;
   outline: none;
+  z-index: 99999;
+  overflow-y: scroll;
+  background: $primary-black;
 
   &__top {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
     display: flex;
     justify-content: space-between;
     padding: 20px 24px;
+    background: $primary-black;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 

@@ -1,6 +1,29 @@
 @import "variables";
 .main {
   background: $primary-black;
+  position: relative;
+  &__decor {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    margin: auto;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
   section {
     width: 1200px;
     margin: auto;
@@ -31,6 +54,7 @@
     padding: 100px 120px 150px;
     box-sizing: content-box;
     background: url("../public/images/hero.png") no-repeat right;
+    background-size: contain;
 
     h1 {
       margin-bottom: 24px;
@@ -56,6 +80,18 @@
             "a c";
     column-gap: 110px;
     padding-top: 40px;
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -100px;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 80px;
+      background: $main-color;
+    }
 
     &__image {
       grid-area: a;
@@ -99,6 +135,18 @@
 
   .benefits {
     padding-top: 200px;
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50px;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 80px;
+      background: $main-color;
+    }
     h2 {
       margin-bottom: 40px;
     }
@@ -132,6 +180,18 @@
 
   .customer {
     padding-top: 140px;
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -100px;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 80px;
+      background: $main-color;
+    }
     h2 {
       margin-bottom: 40px;
     }
@@ -171,6 +231,7 @@
       display: flex;
       background: $secondary-black;
       border: 1px solid $dark-grey;
+      transition: $main-transition;
 
       &_image {
         margin-right: 24px;
@@ -268,6 +329,10 @@
   .contact {
     padding-top: 40px;
     padding-bottom: 100px;
+
+    p {
+      width: 50%;
+    }
     form {
       display: flex;
       flex-direction: column;
@@ -298,14 +363,36 @@
 
   .videoGuide {
     padding-top: 100px;
+    position: relative;
     &__content {
       display: flex;
       justify-content: space-between;
+
+      iframe {
+        margin-bottom: 16px;
+        z-index: 1;
+        & + h3 {
+          margin-bottom: 5px;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 24px;
+          & + p {
+            font-size: 12px;
+            line-height: 16px;
+            color: #BEC7D7;
+          }
+        }
+      }
       &_mobile {
         display: none;
       }
     }
     &__image {
+      cursor: pointer;
+
+      .active {
+        border: 1px solid $main-color;
+      }
       &:after {
         content: url("../public/images/icons/play.svg");
         position: absolute;
@@ -330,6 +417,10 @@
 
 @media screen and (max-width: 1280px) {
   .main {
+    &__decor {
+      width: calc(100% - 48px);
+      z-index: 2;
+    }
     section {
       width: 100%;
       padding-left: 24px;
@@ -435,6 +526,12 @@
 
 @media screen and (max-width: 1024px) {
   .main {
+
+    &__decor {
+      &:after {
+        content: none;
+      }
+    }
     section {
       h2 {
         margin-bottom: 24px;
@@ -498,6 +595,10 @@
     .about {
       column-gap: 50px;
 
+      &:after {
+        content: none;
+      }
+
       &__image {
         align-self: center;
         width: 100%;
@@ -532,6 +633,9 @@
     .benefits {
       padding-top: 50px;
       padding-bottom: 50px;
+      &:after {
+        content: none;
+      }
       h2 {
         margin-bottom: 40px;
       }
@@ -565,6 +669,9 @@
 
     .customer {
       padding-bottom: 50px;
+      &:after {
+        content: none;
+      }
       h2 {
         margin-bottom: 40px;
       }
@@ -736,6 +843,23 @@
         display: none;
         &_mobile {
           display: block;
+          iframe {
+            margin-bottom: 16px;
+            & + h3 {
+              margin-bottom: 5px;
+              font-weight: bold;
+              font-size: 16px;
+              line-height: 24px;
+              & + p {
+                font-size: 12px;
+                line-height: 16px;
+                color: #BEC7D7;
+                font-weight: normal;
+                text-decoration: none;
+                cursor: default;
+              }
+            }
+          }
 
           h3 {
             font-weight: bold;
@@ -785,21 +909,17 @@
 
     .top {
       position: relative;
-      background: url("../public/images/hero.png") no-repeat center;
+      background: url("../public/images/hero.png") no-repeat bottom center;
+      background-size: 160%;
+      padding-top: 65px;
+      padding-bottom: 230px;
 
       &:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 100%;
-        width: 100%;
-        background: rgb(16, 19, 21);
-        background: linear-gradient(90deg, rgba(16, 19, 21, 1) 0%, rgba(16, 19, 21, 0.4) 40%, rgba(255, 255, 255, 0) 100%);
+        content: none;
       }
 
       h1 {
+        margin-bottom: 16px;
         font-size: 32px;
         line-height: 44px;
       }
@@ -835,6 +955,7 @@
     "b"
     "c";
       padding-top: 70px;
+      padding-bottom: 0;
 
       &__text {
         max-width: none;
@@ -921,8 +1042,14 @@
         padding-bottom: 0;
         display: block;
 
-        & > button {
+        & > p {
           margin-top: 20px;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 24px;
+          color: $main-color;
+          cursor: pointer;
+          text-decoration: underline;
         }
       }
       &__list {
@@ -969,7 +1096,7 @@
 
         &_raiting {
           position: relative;
-          margin-right: 15px;
+          margin-right: 5px;
           width: 110px;
 
           img {
@@ -1053,6 +1180,10 @@
     .contact {
       padding-top: 70px;
       padding-bottom: 50px;
+
+      p {
+        width: 100%;
+      }
     }
 
     //    label {
@@ -1083,6 +1214,16 @@
   }
 }
 
+@media screen and (max-width: 500px) {
+  .main {
+    .top {
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 374px) {
   .main {
     .catalog {
@@ -1098,5 +1239,30 @@
         }
       }
     }
+  }
+}
+
+.loader {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+}
+.loader:after {
+  content: " ";
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin-left: 15px;
+  border-radius: 50%;
+  border: 2px solid $main-color;
+  border-color: $main-color transparent $main-color transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
