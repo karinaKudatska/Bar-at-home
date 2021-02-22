@@ -419,6 +419,7 @@
   .main {
     &__decor {
       width: calc(100% - 48px);
+      max-width: none;
       z-index: 1;
     }
     section {
