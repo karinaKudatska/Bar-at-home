@@ -41,7 +41,7 @@ export default function SimpleAccordion({setIsDeliveryOpen, setIsReturnOpen, fix
         <AccordionDetails className={`${classes.footer__right_menu} ${classes.catalog}`}>
           <ul>
             {sets.map(set => (
-              <li>
+              <li key={set.title}>
                 <a href="#catalog">
                   {set.title}
                 </a>

@@ -57,28 +57,6 @@
 
 @media screen and (max-width: 768px) {
   .tabs {
-    &__top {
-      margin-bottom: 16px;
-      display: flex;
-      justify-content: space-between;
-
-      div {
-        cursor: pointer;
-        width: 50%;
-        padding: 16px 0;
-        font-weight: bold;
-        font-size: 16px;
-        line-height: 24px;
-        text-align: center;
-        color: $secondary-grey;
-        border-bottom: 1px solid $secondary-grey;
-        &.tabs__active {
-          border-bottom: 3px solid $main-color;
-          color: $primary-white;
-        }
-      }
-    }
-
     &__description {
       font-size: 14px;
       line-height: 24px;

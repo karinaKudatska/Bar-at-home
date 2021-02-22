@@ -35,7 +35,7 @@ export default function Footer({setIsDeliveryOpen, setIsReturnOpen, fixBody}) {
             <h2>Каталог</h2>
             <ul>
               {sets.map(set => (
-                <li>
+                <li key={set.title}>
                   <a href="#catalog">
                     {set.title}
                   </a>

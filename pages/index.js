@@ -248,7 +248,7 @@ export default function Home() {
             <h2>Каталог</h2>
             <div className={styles.catalog__list}>
               {sets.slice(0, itemsCount).map(set => (
-                <div id={set.id} key={set.title} className={styles.catalog__item}>
+                <div key={set.title} className={styles.catalog__item}>
                   <img className={styles.catalog__item_image} src={set.images[0]} />
                   <div className={styles.catalog__item_info}>
                     <div className={styles.catalog__item_top}>
@@ -369,11 +369,11 @@ export default function Home() {
           </div>
           <div className={styles.videoGuide__content_mobile} id="videoGuides-mobile">
               {videoGuides.slice(0, videosCount).map((item, i) => (
-                <div  style={{marginBottom: 30}}>
-                <iframe key={i} width="100%" height="300" src={item.video} frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                />
+                <div key={i}  style={{marginBottom: 30}}>
+                  <iframe key={i} width="100%" height="300" src={item.video} frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                  />
                   <h3>{item.title}</h3>
                   <p>{activeVideo.subtitle}</p>
                 </div>

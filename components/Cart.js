@@ -120,7 +120,7 @@ export default function Cart({isCartOpen, setIsCartOpen, items, unFixBody, setIs
             {order && (
               <div className={styles.cart__order}>
                 {order.map(item => (
-                  <div className={styles.cart__order_item}>
+                  <div key={item.title} className={styles.cart__order_item}>
                     <div className={styles.cart__order_item_left}>
                       <div>
                         <img className={styles.cart__order_item_image} src={item.images[0]} />
