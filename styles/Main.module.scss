@@ -240,6 +240,8 @@
 
       &_image {
         margin-right: 24px;
+        max-width: 215px;
+        object-fit: cover;
       }
 
       &_info {
@@ -719,7 +721,11 @@
         grid-template-columns: 140px 1fr;
         grid-template-areas: "a b"
       "c c";
+        row-gap: 20px;
 
+        &_info {
+          padding: 0;
+        }
         &_image {
           width: 120px;
           height: auto;
@@ -739,6 +745,11 @@
             top: 0;
             right: 0;
             backdrop-filter: grayscale(100%);
+          }
+        }
+        &_bottom {
+          button {
+            display: none;
           }
         }
 

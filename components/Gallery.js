@@ -11,7 +11,6 @@ export default function Gallery({product}) {
     <div className={styles.product__images} id="gallery">
       <Swiper
         slidesPerView={4}
-        loop={true}
         grabCursor={true}
         direction={'horizontal'}
         spaceBetween={0}
