@@ -1,9 +1,13 @@
 @import "variables";
 .footer {
-  width: 100vw;
   padding: 32px 0;
   background: $primary-black;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  width: 100vw;
+  max-width: 1440px;
+  margin: auto;
+  box-sizing: content-box;
 
   &__container {
     display: grid;

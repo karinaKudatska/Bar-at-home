@@ -55,7 +55,7 @@
   }
   .swiper-slide {
     height: 90px;
-    width: 160px;
+    width: auto;
   }
   .swiper-slide iframe {
     height: 90px;
@@ -235,8 +235,10 @@
 
 html.fixed {
   overflow-y: hidden;
+  pointer-events: none;
   body {
     overflow-y: hidden;
+    pointer-events: none;
   }
 }
 
@@ -246,10 +248,10 @@ html.fixed {
 
 ::-webkit-scrollbar {
   width: 14px;
-  background-color: $secondary-black;
+  background-color: transparent;
 }
 ::-webkit-scrollbar-track {
-  background-color: transparent;
+  background-color: $secondary-black;
 }
 ::-webkit-scrollbar-thumb {
   background-color: rgba(#d6dee1, 0.5);
@@ -266,4 +268,12 @@ html.fixed {
   ::-webkit-scrollbar {
     display: none;
   }
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+html {
+  height: -webkit-fill-available;
 }

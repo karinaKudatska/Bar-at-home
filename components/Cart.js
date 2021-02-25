@@ -5,6 +5,10 @@ import { motion } from "framer-motion"
 import InputMask from "react-input-mask";
 import Button from "./Button";
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Div100vh from "react-div-100vh";
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+import Dialog from '@material-ui/core/Dialog';
 
 export default function Cart({isCartOpen, setIsCartOpen, items, unFixBody, setIsBigLoaderVisible, setIsSuccessOpen, setIsProductOpen }) {
   const [order, setOrder] = useState(items)
@@ -14,6 +18,9 @@ export default function Cart({isCartOpen, setIsCartOpen, items, unFixBody, setIs
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [disabledButton, setDisabledButton] = useState(true);
+
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleClickAway = () => {
     setIsCartOpen(false);
@@ -106,84 +113,84 @@ export default function Cart({isCartOpen, setIsCartOpen, items, unFixBody, setIs
         open={isCartOpen}
         style={{zIndex: 99999}}
       >
-        <ClickAwayListener onClickAway={handleClickAway}>
-          <motion.div
-            className={styles.cart}
-            initial={{ transform: "translateY(-100%)" }}
-            animate={{ transform: "translateY(-50%)" }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className={styles.cart__top}>
-              <h2>Ваше замовлення</h2>
-              <img src="images/icons/close.svg" onClick={() => {setIsCartOpen(false); unFixBody()}} />
-            </div>
-            {order && (
-              <div className={styles.cart__order}>
-                {order.map(item => (
-                  <div key={item.title} className={styles.cart__order_item}>
-                    <div className={styles.cart__order_item_left}>
-                      <div>
-                        <img className={styles.cart__order_item_image} src={item.images[0]} />
-                        <p>{item.title}</p>
-                      </div>
-                      <img className={styles.removeMobile} src="images/icons/remove.svg" onClick={() => removeItem(item)} />
-                    </div>
-                    <div className={styles.cart__order_item_right}>
-                      <div className={styles.cart__order_item_count}>
-                        <img src="images/icons/minus.svg" onClick={() => subtractItem(item)} />
-                        <span>{item.amount}</span>
-                        <img src="images/icons/plus.svg" onClick={() => addItem(item)}/>
-                      </div>
-                      <div>
-                        {item.discount &&
-                        <div className={styles.cart__order_item_price}>
-                          <span style={{textDecoration: "line-through"}}>{item.price} грн</span>
-                          <span>{item.price - item.discount} грн</span>
-                        </div>
-                        }
-                        {!item.discount &&
-                        <div className={styles.cart__order_item_price}>
-                          <span>{item.price} грн</span>
-                        </div>
-                        }
-                      </div>
-                      <img className={styles.remove} src="images/icons/remove.svg" onClick={() => removeItem(item)} />
-                    </div>
-                  </div>
-                ))}
-                <div className={styles.cart__payment}>
-                  <div>
-                    <span>Разом:</span>
-                    <span>{total} ₴</span>
-                  </div>
-                  <div>
-                    <span>Знижка:</span>
-                    <span>{discount} ₴</span>
-                  </div>
-                  <div>
-                    <span>Всього:</span>
-                    <span>{total - discount} ₴</span>
-                  </div>
-                </div>
-                <div className={styles.cart__form}>
-                  <p>Залиште свої контакти і ми зв’яжемось з вами найближчим часом для підтвердження замовлення:</p>
-                  <form autoComplete="off" method="POST" onSubmit={e => onSubmit(e)}>
-                    <label htmlFor="name">Ім’я</label>
-                    <input onChange={(e) => setName(e.target.value)} id="name" name="name" type="text" placeholder="Введіть ім’я" required/>
-                    <label htmlFor="phone">Телефон</label>
-                    <InputMask onChange={(e) => setPhone(e.target.value)} mask="+3\80 (99) 999 99 99" name="phone" placeholder="+380 (00) 000 00 00" required/>
-                    <label htmlFor="email">Email</label>
-                    <input onChange={(e) => setEmail(e.target.value)} id="email" type="email" name="email" placeholder="Введіть email"/>
-                    <Button disabled={disabledButton} id="cart-submit" type="submit" text="Підтвердити замовлення" />
-                  </form>
-                </div>
+          <ClickAwayListener onClickAway={handleClickAway}>
+            <motion.div
+              className={styles.cart}
+              initial={{ top: "-100%" }}
+              animate={{ top: "50%" }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className={styles.cart__top}>
+                <h2>Ваше замовлення</h2>
+                <img src="images/icons/close.svg" onClick={() => {setIsCartOpen(false); unFixBody()}} />
               </div>
-            )}
-            {!order && (
-              <p className={styles.cart__empty}>Ваш кошик порожній.</p>
-            )}
-          </motion.div>
-        </ClickAwayListener>
+              {order && order.length > 0 && (
+                <div className={styles.cart__order}>
+                  {order.map(item => (
+                    <div key={item.title} className={styles.cart__order_item}>
+                      <div className={styles.cart__order_item_left}>
+                        <div>
+                          <img className={styles.cart__order_item_image} src={item.images[0]} />
+                          <p>{item.title}</p>
+                        </div>
+                        <img className={styles.removeMobile} src="images/icons/remove.svg" onClick={() => removeItem(item)} />
+                      </div>
+                      <div className={styles.cart__order_item_right}>
+                        <div className={styles.cart__order_item_count}>
+                          <img src="images/icons/minus.svg" onClick={() => subtractItem(item)} />
+                          <span>{item.amount}</span>
+                          <img src="images/icons/plus.svg" onClick={() => addItem(item)}/>
+                        </div>
+                        <div>
+                          {item.discount &&
+                          <div className={styles.cart__order_item_price}>
+                            <span style={{textDecoration: "line-through"}}>{item.price} грн</span>
+                            <span>{item.price - item.discount} грн</span>
+                          </div>
+                          }
+                          {!item.discount &&
+                          <div className={styles.cart__order_item_price}>
+                            <span>{item.price} грн</span>
+                          </div>
+                          }
+                        </div>
+                        <img className={styles.remove} src="images/icons/remove.svg" onClick={() => removeItem(item)} />
+                      </div>
+                    </div>
+                  ))}
+                  <div className={styles.cart__payment}>
+                    <div>
+                      <span>Разом:</span>
+                      <span>{total} ₴</span>
+                    </div>
+                    <div>
+                      <span>Знижка:</span>
+                      <span>{discount} ₴</span>
+                    </div>
+                    <div>
+                      <span>Всього:</span>
+                      <span>{total - discount} ₴</span>
+                    </div>
+                  </div>
+                  <div className={styles.cart__form}>
+                    <p>Залиште свої контакти і ми зв’яжемось з вами найближчим часом для підтвердження замовлення:</p>
+                    <form autoComplete="off" method="POST" onSubmit={e => onSubmit(e)}>
+                      <label htmlFor="name">Ім’я</label>
+                      <input onChange={(e) => setName(e.target.value)} id="name" name="name" type="text" placeholder="Введіть ім’я" required/>
+                      <label htmlFor="phone">Телефон</label>
+                      <InputMask onChange={(e) => setPhone(e.target.value)} mask="+3\80 (99) 999 99 99" name="phone" placeholder="+380 (00) 000 00 00" required/>
+                      <label htmlFor="email">Email</label>
+                      <input onChange={(e) => setEmail(e.target.value)} id="email" type="email" name="email" placeholder="Введіть email"/>
+                      <Button disabled={disabledButton} id="cart-submit" type="submit" text="Підтвердити замовлення" />
+                    </form>
+                  </div>
+                </div>
+              )}
+              {!order || order.length === 0 && (
+                <p className={styles.cart__empty}>Ваш кошик порожній.</p>
+              )}
+            </motion.div>
+          </ClickAwayListener>
       </Modal>
   );
 }

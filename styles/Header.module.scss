@@ -1,10 +1,14 @@
 @import "variables";
 .header {
-  position: sticky;
-  position: -webkit-sticky;
+  max-width: 1440px;
+  margin: auto;
+  box-sizing: content-box;
+  position: fixed;
   top: 0;
-  z-index: 9999;
-  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: 9;
   height: 72px;
   background: $primary-black;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -91,6 +95,9 @@
 
 @media screen and (max-width: 768px) {
   .header {
+    &__container {
+      padding: 0 0 0 24px;
+    }
     &__nav {
       display: none;
       &_mobile {
@@ -105,10 +112,20 @@
         }
 
         div:first-child {
-          padding: 0 17px;
+          padding: 0 14px 0 24px;
+          transform: $main-transition;
+
+          &:active {
+            transform: scale(1.1);
+          }
         }
         div:last-child {
-          padding-left: 17px;
+          padding: 0 24px 0 14px;
+          transform: $main-transition;
+
+          &:active {
+            transform: scale(1.1);
+          }
         }
       }
     }

@@ -9,6 +9,7 @@
   max-width: 640px;
   background: $secondary-black;
   outline: none;
+  pointer-events: auto;
 
   &__top {
     position: sticky;

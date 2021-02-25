@@ -315,6 +315,7 @@ export default function Home() {
           <Swiper
             slidesPerView={"auto"}
             spaceBetween={30}
+            slidesPerGroup={1}
             breakpoints={{
               768: {
                 slidesPerView: 3,
@@ -357,11 +358,16 @@ export default function Home() {
                   className={styles.videoGuide__image}
                   onClick={() => setActiveVideo(item)}
                 >
-                  <img
-                    className={item.img === activeVideo.img ? styles.active : ''}
-                    src={`https://i.ytimg.com/vi/${item.img}/maxresdefault.jpg`}
-                    width="160"
-                    height="90" />
+                  <div>
+                    <img
+                      className={item.img === activeVideo.img ? styles.active : ''}
+                      src={`https://i.ytimg.com/vi/${item.img}/maxresdefault.jpg`}
+                      width="160"
+                      height="90" />
+                  </div>
+                  <div>
+                    <h3>{item.title}</h3>
+                  </div>
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -414,14 +420,14 @@ export default function Home() {
       </main>
       <Loader isBigLoaderVisible={isBigLoaderVisible} />
       <Footer fixBody={fixBody} setIsDeliveryOpen={setIsDeliveryOpen} setIsReturnOpen={setIsReturnOpen}/>
-      <Product unFixBody={unFixBody} setIsVideoOpen={setIsVideoOpen} setVideoId={setVideoId} unFixBody={unFixBody} product={sets.indexOf(selectedProduct)} setIsProductOpen={setIsProductOpen} isProductOpen={isProductOpen} setSelectedProduct={setSelectedProduct} addToCart={addToCart}/>
+      <Product fixBody={fixBody} unFixBody={unFixBody} setIsVideoOpen={setIsVideoOpen} setVideoId={setVideoId} unFixBody={unFixBody} product={sets.indexOf(selectedProduct)} setIsProductOpen={setIsProductOpen} isProductOpen={isProductOpen} setSelectedProduct={setSelectedProduct} addToCart={addToCart}/>
       <Cart setIsProductOpen={setIsProductOpen} setIsBigLoaderVisible={setIsBigLoaderVisible} unFixBody={unFixBody} isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} items={selectedGoods} setIsSuccessOpen={setIsSuccessOpen} />
       <Delivery unFixBody={unFixBody} isDeliveryOpen={isDeliveryOpen} setIsDeliveryOpen={setIsDeliveryOpen} />
       <Success unFixBody={unFixBody} isSuccessOpen={isSuccessOpen} setIsSuccessOpen={setIsSuccessOpen} />
       <Return unFixBody={unFixBody} isReturnOpen={isReturnOpen} setIsReturnOpen={setIsReturnOpen} />
-      <MobileMenu unFixBody={unFixBody} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} setIsCartOpen={setIsCartOpen}/>
+      <MobileMenu fixBody={fixBody} unFixBody={unFixBody} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} setIsCartOpen={setIsCartOpen}/>
       <PulseButton />
-      <ModalVideo channel='youtube' autoplay isOpen={isVideoOpen} videoId={videoId} onClose={() => setIsVideoOpen(false)} />
+      <ModalVideo style={{pointerEvents: 'auto'}} channel='youtube' autoplay isOpen={isVideoOpen} videoId={videoId} onClose={() => setIsVideoOpen(false)} />
     </div>
   )
 }

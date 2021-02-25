@@ -6,6 +6,7 @@
   padding: 0 150px 24px;
   background: $secondary-black;
   outline: none;
+  pointer-events: auto;
 
   &__wrapper {
     margin: 10vh auto 10vh;
@@ -288,15 +289,20 @@
 
 @media screen and (max-width: 767px) {
   .fixedButton {
-    padding: 16px 0 0;
+    position: sticky;
+    position: -webkit-sticky;
+    bottom: -16px;
+    padding: 16px 0;
     display: block;
     width: 100%;
+
+    background: $secondary-black;
     button {
       width: 100%;
     }
   }
   .product {
-    padding: 0 16px 16px;
+    padding: 30px 16px 16px;
     position: relative;
     width: auto;
     margin: auto;
@@ -306,7 +312,7 @@
     pointer-events: auto;
 
     &__wrapper {
-      padding: 30px 0;
+      padding: 5px 0;
       height: 100%;
       width: 100%;
       margin: 0 auto;
@@ -319,13 +325,15 @@
     &__close {
       display: none;
       &_inner {
-        height: 40px;
-        padding: 0 16px;
+        padding: 0 8px;
+        border-radius: 10px 10px 0 0;
+        height: 32px;
         display: flex;
         justify-content: flex-end;
         background: $secondary-black;
-        position: sticky;
-        position: -webkit-sticky;
+        position: fixed;
+        width: 88%;
+        margin: auto;
         top: 0;
         z-index: 99999;
 

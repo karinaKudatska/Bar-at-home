@@ -1,14 +1,16 @@
 @import "variables";
 .cart {
-  min-height: 300px;
   margin: auto;
-  top: 50%;
-  position: relative;
-  transform: translateY(50%);
   width: 100%;
   max-width: 640px;
+  height: 100%;
+  position: relative;
+  max-height: 732px;
+  transform: translateY(-50%);
   background: $secondary-black;
   outline: none;
+  pointer-events: auto;
+  overflow-y: scroll;
 
   &__empty {
     font-size: 18px;
@@ -36,8 +38,6 @@
   }
 
   &__order {
-    max-height: 740px;
-    overflow-y: scroll;
     padding: 16px 24px;
     &_item {
       padding: 16px 0 16px;
@@ -174,10 +174,12 @@
 
 @media screen and (max-width: 630px){
   .cart {
-    height: 100%;
     transform: none !important;
-    top: 0;
-    min-height: 300px;
+    top: 0 !important;
+    height: 100%;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    overflow-y: auto;
     margin: auto;
     position: relative;
     width: 100%;
@@ -186,19 +188,19 @@
     outline: none;
 
     &__empty {
+      padding-top: 80px;
       font-size: 14px;
-      padding-top: 100px;
     }
 
     &__top {
-      position: fixed;
+      position:fixed;
+      top: 0;
       background: $secondary-black;
-      left: 0;
-      right: 0;
       display: flex;
       justify-content: space-between;
       padding: 20px 24px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 9999;
       h2 {
         font-weight: bold;
         font-size: 16px;
@@ -210,10 +212,7 @@
     }
 
     &__order {
-      max-height: 740px;
-      height: 100vh;
-      overflow: scroll;
-      padding: 70px 24px 16px;
+      padding: 65px 24px 16px;
       &_item {
         padding: 16px 0 16px;
         display: flex;
