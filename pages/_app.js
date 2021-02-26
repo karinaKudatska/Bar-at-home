@@ -9,7 +9,9 @@ function MyApp({ Component, pageProps }) {
     <>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>Bar at home</title>
+          <title>Bar at home - інтернет-магазин барного інвентарю</title>
+          <meta name="description" content="Інтернет-магазин Bar at home: барний інвентар, універсальні набори для бару, шейкера, джигера, стрейнери, а також барні ложки"/>
+          <meta name="keywords" content="шейкер, джигер, барний інвентар"/>
           <link rel="apple-touch-icon" sizes="57x57" href="/favicons/favicons/apple-icon-57x57.png" />
           <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-icon-60x60.png" />
           <link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-icon-72x72.png" />
