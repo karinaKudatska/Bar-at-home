@@ -124,7 +124,7 @@ export const sets =[
       "images/catalog/gold-stir-2.png",
     ],
     "price": 2180,
-    "discount": 1980,
+    "discount": 200,
     "rating": 80,
     "components": [
       "склянка для змішування, що використовується для методу приготування коктейлю - Stir",
