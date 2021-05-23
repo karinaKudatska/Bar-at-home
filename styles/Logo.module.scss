@@ -3,6 +3,10 @@
   display: flex;
   align-items: center;
 
+  img {
+    max-width: 32px;
+  }
+
   span {
     margin-left: 16px;
     font-size: 20px;

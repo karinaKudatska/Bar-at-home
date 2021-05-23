@@ -123,8 +123,8 @@ export const sets =[
       "images/catalog/gold-stir-1.png",
       "images/catalog/gold-stir-2.png",
     ],
-    "price": 2180,
-    "discount": 200,
+    "price": 1980,
+    "discount": 340,
     "rating": 80,
     "components": [
       "склянка для змішування, що використовується для методу приготування коктейлю - Stir",
@@ -233,7 +233,7 @@ export const sets =[
       "images/catalog/pink-shake-30-2.png"
     ],
     "price": 1680,
-    "discount": 100,
+    "discount": 260,
     "rating": 100,
     "components": [
       "японський шейкер, який є улюбленцем в барному світі\n",
@@ -313,6 +313,18 @@ export const videoGuides = [
     title: "Класичний рецепт \"Bloody Mary\"",
     subtitle: "Опис відеогайду",
     img: "tgMcHlr8pgw",
+  },
+  {
+    video:  "https://www.youtube.com/embed/Fo4MTlKrE0k",
+    title: "Класичний рецепт Whiskey Sour",
+    subtitle: "Опис відеогайду",
+    img: "Fo4MTlKrE0k",
+  },
+  {
+    video:  "https://www.youtube.com/embed/zNfnf__2V34",
+    title: "Готуємо Negroni",
+    subtitle: "Опис відеогайду",
+    img: "zNfnf__2V34",
   }
 ]
 
