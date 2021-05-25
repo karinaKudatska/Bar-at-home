@@ -90,9 +90,9 @@ export default function Cart({isCartOpen, setIsCartOpen, items, unFixBody, setIs
     e.preventDefault()
     let text = `@lasgrate @Silence_side%0A%0A<b>Нове замовлення:</b>%0A`
     order.map(item => {
-      text += ` - ${item.title}: ${item.amount - item.discount} шт.%0A`
+      text += ` - ${item.title}: ${item.amount} шт.%0A`
     })
-    text += `%0A<b>Сума:</b> ${total} грн.%0A%0A<b>Ім'я:</b> ${name}%0A<b>Телефон:</b> ${phone}`
+    text += `%0A<b>Сума:</b> ${total - discount} грн.%0A%0A<b>Ім'я:</b> ${name}%0A<b>Телефон:</b> ${phone}`
 
     if(email.length > 0) {
       text += `%0A<b>Email:</b> ${email}`
