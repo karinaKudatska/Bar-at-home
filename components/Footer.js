@@ -15,9 +15,9 @@ export default function Footer({setIsDeliveryOpen, setIsReturnOpen, fixBody}) {
           </div>
           <div className={styles.footer__left_socials}>
             <p>Приєднуйтесь до нас!</p>
-            <a href="#"><img src="images/icons/facebook.svg"/></a>
-            <a href="https://www.instagram.com/bar_at_home.ua/"><img src="images/icons/instagram.svg"/></a>
-            <a href="https://www.youtube.com/channel/UCWBDl0QWDxHpslavIcn2MgQ"><img src="images/icons/youtube.svg"/></a>
+            {/*<a href="#"><img alt="" src="images/icons/facebook.svg"/></a>*/}
+            <a href="https://www.instagram.com/bar_at_home.ua/" target="_blank" rel="noopener"><img alt="" src="images/icons/instagram.svg"/></a>
+            <a href="https://www.youtube.com/channel/UCWBDl0QWDxHpslavIcn2MgQ" target="_blank" rel="noopener"><img alt="" src="images/icons/youtube.svg"/></a>
           </div>
         </div>
         <Accordion fixBody={fixBody} setIsDeliveryOpen={setIsDeliveryOpen} setIsReturnOpen={setIsReturnOpen}/>

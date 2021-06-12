@@ -23,10 +23,10 @@ export default function Success({isSuccessOpen, setIsSuccessOpen, unFixBody}) {
         >
           <div className={styles.modal__top}>
             <h2>
-              <img src="images/icons/success.svg" />
+              <img alt="" src="images/icons/success.svg" />
               Ваше замовлення надіслано
             </h2>
-            <img src="images/icons/close.svg" onClick={() => {setIsSuccessOpen(false); unFixBody()}} />
+            <img alt="" src="images/icons/close.svg" onClick={() => {setIsSuccessOpen(false); unFixBody()}} />
           </div>
           <div className={styles.modal__main}>
             <p>Дякуємо! Ваше замовлення успішно надіслано. Ми зв’яжемось з вами протягом 15 хвилин.</p>

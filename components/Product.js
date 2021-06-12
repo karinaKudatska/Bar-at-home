@@ -26,7 +26,7 @@ export default function Product({isProductOpen, setIsProductOpen, product, addTo
             className={styles.product__wrapper}
           >
             <div onClick={() => {setIsProductOpen(false); unFixBody();}} className={styles.product__close}>
-              <img src="images/icons/close.svg" />
+              <img alt="" src="images/icons/close.svg" />
             </div>
             <Swiper
               className="product"
@@ -41,7 +41,7 @@ export default function Product({isProductOpen, setIsProductOpen, product, addTo
               {sets.map(product => (
                 <SwiperSlide key={product.title}>
                   <div onClick={() => {setIsProductOpen(false); unFixBody()}} className={styles.product__close_inner}>
-                    <img src="images/icons/close.svg" />
+                    <img alt="" src="images/icons/close.svg" />
                   </div>
                   <motion.div className={styles.product}>
                     <div className={styles.product__content}>
@@ -50,7 +50,7 @@ export default function Product({isProductOpen, setIsProductOpen, product, addTo
                         <h2>{product.title}</h2>
                         <p className={styles.product__subtitle}>{product.subtitle}</p>
                         <div className={styles.product__raiting}>
-                          <img src="images/icons/rate.svg" />
+                          <img alt="" src="images/icons/rate.svg" />
                           <div style={{width: `${100 - product.rating}%`}} />
                         </div>
                         <div className={styles.product__buy}>
@@ -108,7 +108,7 @@ export default function Product({isProductOpen, setIsProductOpen, product, addTo
                               onClick={() => {setVideoId(item.img); setIsVideoOpen(true)}}
                             >
                               <div>
-                                <img
+                                <img alt=""
                                   src={`https://i.ytimg.com/vi/${item.img}/maxresdefault.jpg`}
                                   width="160"
                                   height="90"

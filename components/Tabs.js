@@ -31,7 +31,7 @@ export default function Tabs({tabs}) {
           {tabs[1].content.map(tab => (
             <div key={tab} className={styles.tabs__review}>
               <span>{tab.author}</span>
-              <div>{Array(tab.stars).fill(<img src="images/icons/star.svg" /> )}</div>
+              <div>{Array(tab.stars).fill(<img alt="" src="images/icons/star.svg" /> )}</div>
               <p>{tab.text}</p>
             </div>
           ))}

@@ -178,8 +178,10 @@
       transform: scale(1) !important;
     }
     .swiper-slide {
-      height: auto;
-      width: auto;
+      height: 454px !important;
+      width: 224px !important;
+      padding: 0 15px;
+      box-sizing: content-box;
     }
 
     .swiper-slide img {
@@ -210,6 +212,10 @@
 
 @media screen and (max-width: 550px) {
   #reviews {
+    .swiper-slide {
+      height: 404px !important;
+      width: 194px !important;
+    }
     .swiper-slide img {
       height: 380px;
       width: 170px;

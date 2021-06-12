@@ -20,7 +20,7 @@ export default function MobileMenu({isMenuOpen, setIsMenuOpen, setIsCartOpen, un
         >
           <div className={styles.menu__top}>
             <Logo />
-            <img src="images/icons/close.svg" onClick={() => {setIsMenuOpen(false); unFixBody()}} />
+            <img alt="" src="images/icons/close.svg" onClick={() => {setIsMenuOpen(false); unFixBody()}} />
           </div>
           <div className={styles.menu__main}>
             <nav>
@@ -32,7 +32,7 @@ export default function MobileMenu({isMenuOpen, setIsMenuOpen, setIsCartOpen, un
                 <li onClick={() => {setIsMenuOpen(false); setIsCartOpen(true); fixBody()}}>
                   <a>
                     Кошик
-                    <img src="images/icons/cart.svg" />
+                    <img alt="" src="images/icons/cart.svg" />
                   </a>
                 </li>
               </ul>

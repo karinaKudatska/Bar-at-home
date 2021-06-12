@@ -22,7 +22,7 @@ export default function Delivery({isDeliveryOpen, setIsDeliveryOpen, unFixBody})
           >
             <div className={styles.modal__top}>
               <h2>Доставка і оплата</h2>
-              <img src="images/icons/close.svg" onClick={() => {setIsDeliveryOpen(false); unFixBody()}} />
+              <img alt="" src="images/icons/close.svg" onClick={() => {setIsDeliveryOpen(false); unFixBody()}} />
             </div>
             <div className={styles.modal__main}>
               <h3>Доставка</h3>

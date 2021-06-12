@@ -4,7 +4,6 @@ import Footer from "../components/Footer";
 import Button from "../components/Button";
 import Product from "../components/Product";
 import Delivery from "../components/Delivery";
-import Accordion from "../components/Accordion";
 import Cart from "../components/Cart";
 import {sets, reviews, videoGuides} from '../data.js'
 import SwiperCore, { Navigation } from 'swiper';
@@ -100,7 +99,7 @@ export default function Home() {
     <div>
       <Header fixBody={fixBody} setIsCartOpen={setIsCartOpen} setIsMenuOpen={setIsMenuOpen}/>
       <main className={styles.main}>
-        <div className={styles.main__decor}></div>
+        <div className={styles.main__decor} />
         <section className={styles.top}>
           <h1>Універсальні набори для бару</h1>
           <p>Спробуй себе у ролі бартендера — влаштовуй власний бар та пий улюблені коктейлі вдома в 3 рази дешевше!</p>
@@ -110,7 +109,7 @@ export default function Home() {
         </section>
         <section id="about" className={styles.about}>
           <h2>Хто ми?</h2>
-          <img className={styles.about__image} src="images/who-we-are.png" />
+          <img alt="" className={styles.about__image} src="images/who-we-are.png" />
           <div className={styles.about__text}>
             <p>Привіт, я Богдан — винахідник ідеї наборів “Bar at home". Мій досвід у барній справі вже 7 років, саме тому я маю нагоду навчати бартендерів та створювати авторське меню кожного сезону.</p>
             <p>Моє захоплення барною індустрією перетворилося на справжнє покликання, накопичивши знання і досвід, я вирішив, що прийшов час ділитися з вами!</p>
@@ -125,34 +124,34 @@ export default function Home() {
               <Button  text="Обрати свій набір" arrow={true} />
             </a>
           </div>
-          <img className={styles.offer__image} src="images/we-offer.png" />
+          <img alt="" className={styles.offer__image} src="images/we-offer.png" />
         </section>
         <section id="benefits" className={styles.benefits}>
           <h2>Чому варто придбати саме наш продукт?</h2>
           <ul className={styles.benefits__list}>
             <li>
-              <img src="images/icons/present.svg" />
+              <img alt="" src="images/icons/present.svg" />
               <div>
                 <h3>Ми пропонуємо універсальні набори</h3>
                 <p>З нашим набором ви приготуєте будь-який класичний або авторський коктейль. Жодних додаткових витрат.</p>
               </div>
             </li>
             <li>
-              <img src="images/icons/medal.svg" />
+              <img alt="" src="images/icons/medal.svg" />
               <div>
                 <h3>Ми гарантуємо якість нашого товару</h3>
                 <p>Ми відібрали для вас найкращі товари, які рекомендують професійні бартендери.</p>
               </div>
             </li>
             <li>
-              <img src="images/icons/price.svg" />
+              <img alt="" src="images/icons/price.svg" />
               <div>
                 <h3>Ми надаємо найкращі ціни</h3>
                 <p>Наша міссія — просувати культуру споживання, тож ми зробили для вас все, щоб ви отримали кращу ціну на ринку.</p>
               </div>
             </li>
             <li>
-              <img src="images/icons/time.svg" />
+              <img alt="" src="images/icons/time.svg" />
               <div>
                 <h3>Ми швидко доставляємо</h3>
                 <p>Відправляємо набори "Новою поштою" одразу ж після замовлення.</p>
@@ -164,35 +163,35 @@ export default function Home() {
           <h2>Набори чудово підійдуть якщо ти:</h2>
           <ul>
             <li>
-              <img src="images/icons/check.svg" />
+              <img alt="" src="images/icons/check.svg" />
               Завжди мріяв спробувати себе в ролі бартендера
             </li>
             <li>
-              <img src="images/icons/check.svg" />
+              <img alt="" src="images/icons/check.svg" />
               Вже досвідчений бармен і хочеш робити коктейлі вдома
             </li>
             <li>
-              <img src="images/icons/check.svg" />
+              <img alt="" src="images/icons/check.svg" />
               Новачок і хочеш навчитися міксології вдома
             </li>
             <li>
-              <img src="images/icons/check.svg" />
+              <img alt="" src="images/icons/check.svg" />
               Захоплюєшся барною культурою
             </li>
             <li>
-              <img src="images/icons/check.svg" />
+              <img alt="" src="images/icons/check.svg" />
               Хочеш зекономити гроші та створити домашній бар
             </li>
             <li>
-              <img src="images/icons/check.svg" />
+              <img alt="" src="images/icons/check.svg" />
               Мрієш створити власний коктейль
             </li>
             <li>
-              <img src="images/icons/check.svg" />
+              <img alt="" src="images/icons/check.svg" />
               Надаєш перевагу домашній атмосфері, проте не можеш відмовитись від коктейлів
             </li>
             <li>
-              <img src="images/icons/check.svg" />
+              <img alt="" src="images/icons/check.svg" />
               Шукаєш крутий подарунок для людини, в “якої все і так є”
             </li>
           </ul>
@@ -204,18 +203,18 @@ export default function Home() {
             <div className={styles.catalog__list}>
               {sets.map(set => (
                 <div key={set.title} className={styles.catalog__item}>
-                  <img className={styles.catalog__item_image} src={set.images[0]} />
+                  <img alt={set.title} className={styles.catalog__item_image} src={set.images[0]} />
                   <div className={styles.catalog__item_info}>
                     <div className={styles.catalog__item_top}>
                       <h3>{set.title}</h3>
                       <p>{set.subtitle}</p>
                       <div className={styles.catalog__item_reviews}>
                         <div className={styles.catalog__item_raiting}>
-                          <img src="images/icons/rate.svg" />
-                          <div style={{width: `${100 - set.rating}%`}}></div>
+                          <img alt="" src="images/icons/rate.svg" />
+                          <div style={{width: `${100 - set.rating}%`}} />
                         </div>
                         <div className={styles.catalog__item_comments}>
-                          <img src="images/icons/comment.svg" />
+                          <img alt="" src="images/icons/comment.svg" />
                           {set.reviews.length}
                         </div>
                       </div>
@@ -249,18 +248,18 @@ export default function Home() {
             <div className={styles.catalog__list}>
               {sets.slice(0, itemsCount).map(set => (
                 <div key={set.title} className={styles.catalog__item}>
-                  <img className={styles.catalog__item_image} src={set.images[0]} />
+                  <img alt={set.title} className={styles.catalog__item_image} src={set.images[0]} />
                   <div className={styles.catalog__item_info}>
                     <div className={styles.catalog__item_top}>
                       <h3>{set.title}</h3>
                       <p>{set.subtitle}</p>
                       <div className={styles.catalog__item_reviews}>
                         <div className={styles.catalog__item_raiting}>
-                          <img src="images/icons/rate.svg" />
-                          <div style={{width: `${100 - set.rating}%`}}></div>
+                          <img alt="" src="images/icons/rate.svg" />
+                          <div style={{width: `${100 - set.rating}%`}} />
                         </div>
                         <div className={styles.catalog__item_comments}>
-                          <img src="images/icons/comment.svg" />
+                          <img alt="" src="images/icons/comment.svg" />
                           {set.reviews.length}
                         </div>
                       </div>
@@ -314,11 +313,11 @@ export default function Home() {
           <h2>Відгуки</h2>
           <Swiper
             slidesPerView={"auto"}
-            spaceBetween={30}
             slidesPerGroup={1}
             breakpoints={{
               768: {
                 slidesPerView: 3,
+                spaceBetween: 30
               },
             }}
             loop={true}
@@ -328,7 +327,7 @@ export default function Home() {
           >
             {reviews.map(review => (
               <SwiperSlide key={review}>
-                <img src={review} />
+                <img alt="" src={review} />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -337,7 +336,7 @@ export default function Home() {
           <h2>Відео-гайди</h2>
           <div className={styles.videoGuide__content}>
             <div>
-              <iframe width="800" height="450" src={activeVideo.video} frameBorder="0"
+              <iframe title={activeVideo.title} width="800" height="450" src={activeVideo.video} frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
               />
@@ -359,7 +358,7 @@ export default function Home() {
                   onClick={() => setActiveVideo(item)}
                 >
                   <div>
-                    <img
+                    <img alt=""
                       className={item.img === activeVideo.img ? styles.active : ''}
                       src={`https://i.ytimg.com/vi/${item.img}/maxresdefault.jpg`}
                       width="160"
@@ -376,7 +375,7 @@ export default function Home() {
           <div className={styles.videoGuide__content_mobile} id="videoGuides-mobile">
               {videoGuides.slice(0, videosCount).map((item, i) => (
                 <div key={i}  style={{marginBottom: 30}}>
-                  <iframe key={i} width="100%" height="300" src={item.video} frameBorder="0"
+                  <iframe title={item.title} key={i} width="100%" height="300" src={item.video} frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
                   />
@@ -420,7 +419,7 @@ export default function Home() {
       </main>
       <Loader isBigLoaderVisible={isBigLoaderVisible} />
       <Footer fixBody={fixBody} setIsDeliveryOpen={setIsDeliveryOpen} setIsReturnOpen={setIsReturnOpen}/>
-      <Product fixBody={fixBody} unFixBody={unFixBody} setIsVideoOpen={setIsVideoOpen} setVideoId={setVideoId} unFixBody={unFixBody} product={sets.indexOf(selectedProduct)} setIsProductOpen={setIsProductOpen} isProductOpen={isProductOpen} setSelectedProduct={setSelectedProduct} addToCart={addToCart}/>
+      <Product fixBody={fixBody} unFixBody={unFixBody} setIsVideoOpen={setIsVideoOpen} setVideoId={setVideoId} product={sets.indexOf(selectedProduct)} setIsProductOpen={setIsProductOpen} isProductOpen={isProductOpen} setSelectedProduct={setSelectedProduct} addToCart={addToCart}/>
       <Cart setIsProductOpen={setIsProductOpen} setIsBigLoaderVisible={setIsBigLoaderVisible} unFixBody={unFixBody} isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} items={selectedGoods} setIsSuccessOpen={setIsSuccessOpen} />
       <Delivery unFixBody={unFixBody} isDeliveryOpen={isDeliveryOpen} setIsDeliveryOpen={setIsDeliveryOpen} />
       <Success unFixBody={unFixBody} isSuccessOpen={isSuccessOpen} setIsSuccessOpen={setIsSuccessOpen} />

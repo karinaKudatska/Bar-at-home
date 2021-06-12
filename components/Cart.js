@@ -122,7 +122,7 @@ export default function Cart({isCartOpen, setIsCartOpen, items, unFixBody, setIs
             >
               <div className={styles.cart__top}>
                 <h2>Ваше замовлення</h2>
-                <img src="images/icons/close.svg" onClick={() => {setIsCartOpen(false); unFixBody()}} />
+                <img alt="" src="images/icons/close.svg" onClick={() => {setIsCartOpen(false); unFixBody()}} />
               </div>
               {order && order.length > 0 && (
                 <div className={styles.cart__order}>
@@ -130,16 +130,16 @@ export default function Cart({isCartOpen, setIsCartOpen, items, unFixBody, setIs
                     <div key={item.title} className={styles.cart__order_item}>
                       <div className={styles.cart__order_item_left}>
                         <div>
-                          <img className={styles.cart__order_item_image} src={item.images[0]} />
+                          <img alt="" className={styles.cart__order_item_image} src={item.images[0]} />
                           <p>{item.title}</p>
                         </div>
-                        <img className={styles.removeMobile} src="images/icons/remove.svg" onClick={() => removeItem(item)} />
+                        <img alt="" className={styles.removeMobile} src="images/icons/remove.svg" onClick={() => removeItem(item)} />
                       </div>
                       <div className={styles.cart__order_item_right}>
                         <div className={styles.cart__order_item_count}>
-                          <img src="images/icons/minus.svg" onClick={() => subtractItem(item)} />
+                          <img alt="" src="images/icons/minus.svg" onClick={() => subtractItem(item)} />
                           <span>{item.amount}</span>
-                          <img src="images/icons/plus.svg" onClick={() => addItem(item)}/>
+                          <img alt="" src="images/icons/plus.svg" onClick={() => addItem(item)}/>
                         </div>
                         <div>
                           {item.discount &&
@@ -154,7 +154,7 @@ export default function Cart({isCartOpen, setIsCartOpen, items, unFixBody, setIs
                           </div>
                           }
                         </div>
-                        <img className={styles.remove} src="images/icons/remove.svg" onClick={() => removeItem(item)} />
+                        <img alt="" className={styles.remove} src="images/icons/remove.svg" onClick={() => removeItem(item)} />
                       </div>
                     </div>
                   ))}

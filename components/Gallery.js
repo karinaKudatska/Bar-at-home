@@ -25,11 +25,11 @@ export default function Gallery({product}) {
       >
         {product.images.map(img => (
           <SwiperSlide>
-            <img className={product.images[activeImage] === img ? styles.product__images_current : ''} src={img} onClick={() => setActiveImage(product.images.indexOf(img))}/>
+            <img alt="" className={product.images[activeImage] === img ? styles.product__images_current : ''} src={img} onClick={() => setActiveImage(product.images.indexOf(img))}/>
           </SwiperSlide>
         ))}
       </Swiper>
-      <img className={styles.product__images_active} src={product.images[activeImage]} />
+      <img alt="" className={styles.product__images_active} src={product.images[activeImage]} />
     </div>
   )
 }

@@ -29,8 +29,8 @@ function MyApp({ Component, pageProps }) {
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
           <meta name="theme-color" content="#ffffff" />
-          <script src="https://unpkg.com/smoothscroll-polyfill/dist/smoothscroll.min.js"></script>
-          <script src="https://unpkg.com/smoothscroll-anchor-polyfill"></script>
+          <script src="https://unpkg.com/smoothscroll-polyfill/dist/smoothscroll.min.js" />
+          <script src="https://unpkg.com/smoothscroll-anchor-polyfill" />
         </Head>
       <Component {...pageProps} />
     </>
